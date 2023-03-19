@@ -28,10 +28,12 @@ check_server_headers = function(server) {
   missing_headers = .security_headers[!.security_headers %in% headers_summary$security_header]
   all_headers = dplyr::bind_rows(headers_summary, get_missing_headers(missing_headers)) |>
     dplyr::arrange(.data$security_header)
-  for (s_header in .security_headers) {
-    header = all_headers[all_headers$security_header == s_header, ]
-    col = get_status_col(header$status) # nolint
-    cli::cli_alert_info("{col(header$security_header)}: {header$message}")
+  for (i in seq_len(nrow(all_headers))) {
+    row = all_headers[i, ]
+    if (row$security_header %in% .security_headers) {
+      col = get_status_col(row$status) # nolint
+      cli::cli_alert_info("{col(row$security_header)}: {row$message}")
+    }
   }
   all_headers
 }
