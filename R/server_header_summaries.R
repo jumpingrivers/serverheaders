@@ -212,6 +212,28 @@ header_summary.scheme = function(value, ...) { #nolint
                 value = as.character(value))
 }
 
+#' @rdname header_summary
+#' @export
+`header_summary.set-cookie` = function(value, ...) { #nolint
+  security_header = class(value)
+  value = as.logical(value)
+  if (length(value) == 0) {
+    status = "OK"
+    message = "No cookies detected"
+  } else if (all(value)) {
+    status = "OK"
+    message = "All cookies use the Secure flag"
+  } else {
+    status = "WARN"
+    message = "Cookies set without using the Secure flag"
+  }
+
+  dplyr::tibble(security_header = security_header,
+                status = status,
+                message = message,
+                value = NA_character_)
+}
+
 ##############################
 # Depreciated headers
 ##############################
