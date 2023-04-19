@@ -37,17 +37,23 @@ check_server_headers = function(server) {
   headers_summary = purrr::map2_df(headers, names(headers), header_summary)
   missing_headers = .security_headers[!.security_headers %in% headers_summary$security_header]
   all_headers = dplyr::bind_rows(headers_summary, get_missing_headers(missing_headers)) |>
+    dplyr::left_join(
+      dplyr::tibble(
+        security_header = names(.documentation_links),
+        documentation = .documentation_links
+      ),
+      by = "security_header") |>
     dplyr::arrange(.data$security_header)
   for (i in seq_len(nrow(all_headers))) {
     row = all_headers[i, ]
     if (row$security_header %in% .security_headers) {
       col = get_status_col(row$status) # nolint
       if (row$status == "WARN") {
-        documentation_link = .documentation_links[[row$security_header]]
-        cli::cli_alert_info("{col(row$security_header)}: {row$message} ({.href [Documentation]({documentation_link})})")
+        msg = "{col(row$security_header)}: {row$message} ({.href [Documentation]({row$documentation})})"
       } else {
-        cli::cli_alert_info("{col(row$security_header)}: {row$message}")
+        msg = "{col(row$security_header)}: {row$message}"
       }
+      cli::cli_alert_info(msg)
     }
   }
   all_headers
