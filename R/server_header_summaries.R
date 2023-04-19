@@ -234,6 +234,59 @@ header_summary.scheme = function(value, ...) { #nolint
                 value = NA_character_)
 }
 
+#' @rdname header_summary
+#' @export
+`header_summary.redirection` = function(value, ...) { #nolint
+  security_header = class(value)
+  value = as.logical(value)
+  if (value) {
+    status = "OK"
+    message = "Redirects to HTTPS"
+  } else {
+    status = "WARN"
+    message = "Does not redirect to an HTTPS site"
+  }
+
+  dplyr::tibble(security_header = security_header,
+                status = status,
+                message = message,
+                value = NA_character_)
+}
+
+#' @rdname header_summary
+#' @export
+`header_summary.subresource-integrity` = function(value, ...) { #nolint
+  security_header = class(value)
+
+  if (length(value) == 0) {
+    status = "OK"
+    message = "Subresource Integrity is not needed since site contains no script tags"
+  } else {
+    integrity = purrr::map(value, "integrity") |>
+      purrr::list_c()
+
+    crossorigin = purrr::map(value, function(x) {
+      crossorigin_attr = x["crossorigin"]
+      if (is.na(crossorigin_attr)) return(FALSE)
+      return(crossorigin_attr == "anonymous")
+    }) |>
+      purrr::list_c()
+
+    if (all(crossorigin) & all(!is.null(integrity))) {
+      status = "OK"
+      message = "Subresource Integrity is implemented"
+    } else {
+      status = "WARN"
+      message = "Subresource Integrity not implemented"
+    }
+  }
+
+  dplyr::tibble(security_header = security_header,
+                status = status,
+                message = message,
+                value = NA_character_)
+}
+
 ##############################
 # Depreciated headers
 ##############################

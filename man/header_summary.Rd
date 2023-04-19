@@ -20,6 +20,8 @@
 \alias{header_summary.x-permitted-cross-domain-policies}
 \alias{header_summary.x-powered-by}
 \alias{header_summary.set-cookie}
+\alias{header_summary.redirection}
+\alias{header_summary.subresource-integrity}
 \title{Header Summaries}
 \usage{
 \method{header_summary}{`referrer-policy`}(value, ...)
@@ -57,6 +59,10 @@ header_summary(value, ...)
 \method{header_summary}{`x-powered-by`}(value, ...)
 
 \method{header_summary}{`set-cookie`}(value, ...)
+
+\method{header_summary}{redirection}(value, ...)
+
+\method{header_summary}{`subresource-integrity`}(value, ...)
 }
 \arguments{
 \item{value}{Header element, likely obtained from httr::headers}
