@@ -214,11 +214,11 @@ header_summary.scheme = function(value, ...) { #nolint
 
 #' @rdname header_summary
 #' @export
-`header_summary.set-cookie` = function(value, ...) { #nolint
+`header_summary.cookies` = function(value, ...) { #nolint
   security_header = class(value)
   value = as.logical(value)
 
-  if (length(value) == 0 | all(is.na(value))) {
+  if (length(value) == 0 || all(is.na(value))) {
     status = "OK"
     message = "No cookies detected"
   } else if (all(value)) {
