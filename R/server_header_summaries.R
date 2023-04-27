@@ -10,7 +10,7 @@ header_summary = function(value, ...) UseMethod("header_summary")
 
 #' @rdname header_summary
 #' @export
-header_summary.default = function(value, ...) {
+header_summary.default = function(value, ...) { #nolint
   security_header = class(value)
   value = as.character(value)
   dplyr::tibble(security_header = security_header,
@@ -273,7 +273,7 @@ header_summary.scheme = function(value, ...) { #nolint
     }) |>
       purrr::list_c()
 
-    if (all(crossorigin) & all(!is.null(integrity))) {
+    if (all(crossorigin) && all(!is.null(integrity))) {
       status = "OK"
       message = "Subresource Integrity is implemented"
     } else {
