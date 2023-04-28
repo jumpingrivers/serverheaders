@@ -4,7 +4,7 @@ check_server_headers = function(server) {
   security_headers = names(.documentation_links)
   missing_headers = security_headers[!security_headers %in% headers_summary$security_header]
   all_headers = dplyr::bind_rows(headers_summary, get_missing_headers(missing_headers)) |>
-    join_with_documentation()
+    add_documentation_column()
   cli_message_output(all_headers, security_headers)
   all_headers
 }

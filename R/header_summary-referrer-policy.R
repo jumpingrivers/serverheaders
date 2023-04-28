@@ -4,7 +4,7 @@
   security_header = class(value)
   value = tolower(as.character(value))
 
-  if (value %in% c("strict-origin","strict-origin-when-cross-origin",
+  if (value %in% c("strict-origin", "strict-origin-when-cross-origin",
                    "no-referrer-when-downgrade", "no-referrer", "same-origin")) {
     status = "OK"
     message = "Acceptable setting found"
