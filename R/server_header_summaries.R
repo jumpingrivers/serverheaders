@@ -218,7 +218,7 @@ header_summary.scheme = function(value, ...) { #nolint
   security_header = class(value)
   value = as.logical(value)
 
-  if (length(value) == 0 || !anyNA(value)) {
+  if (length(value) == 0 || all(is.na(value))) {
     status = "OK"
     message = "No cookies detected"
   } else if (all(value)) {
