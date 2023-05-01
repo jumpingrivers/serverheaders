@@ -35,7 +35,7 @@ get_missing_headers = function(security_headers)  {
                 value = NA_character_)
 }
 
-#' Is website redirection implemented i.e. HTTP -> HTTPS?
+# Does the website redirection implemented i.e. HTTP -> HTTPS?
 is_redirected = function(res) {
   all_headers = res$all_headers
   status_codes = purrr::map_dbl(all_headers, "status")
@@ -44,8 +44,8 @@ is_redirected = function(res) {
   return(redirection)
 }
 
-#' Retrieves HTML attributes of any script tags to check
-#' subresource integrity
+# Retrieves HTML attributes of any script tags to check
+# subresource integrity
 get_js_resources = function(res) {
   res |>
     httr::content() |>
