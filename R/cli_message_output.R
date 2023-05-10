@@ -4,12 +4,17 @@ cli_message_output = function(all_headers, security_headers) {
     if (row$security_header %in% security_headers) {
       col = get_status_col(row$status) #nolint
       msg = "{col(row$security_header)}: {row$message}"
+
       if (row$status == "WARN") {
         msg = paste(msg, "({.href [Docs]({row$documentation})})")
+        cli::cli_alert_danger(msg)
+      } else {
+        cli::cli_alert_success(msg)
       }
-      cli::cli_alert_info(msg)
+
     }
   }
+  return(invisible(NULL))
 }
 
 get_status_col = function(status) {

@@ -1,7 +1,11 @@
 check_status_code = function(server) {
   res = httr::HEAD(server)
-  status_code = httr::status_code(res)
-  col = if (stringr::str_starts(status_code, "2")) cli::col_green else cli::col_red #nolint
-  cli::cli_alert_info("{col('Status code')}: {status_code}")
-  return(status_code)
+  status_codes = get_status_codes(res)
+  status_code_msg = glue::glue(paste(status_codes, collapse = " {cli::symbol$arrow_right} ")) # nolint
+  if (any(stringr::str_starts(status_codes, "2"))) {
+    cli::cli_alert_success("{cli::col_green('Status code')}: {status_code_msg}")
+  } else {
+    cli::cli_alert_danger("{cli::col_red('Status code')}: {status_code_msg}")
+  }
+  return(status_codes)
 }

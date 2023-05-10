@@ -157,7 +157,6 @@ header_summary.scheme = function(value, ...) { #nolint
                 value = as.character(value))
 }
 
-
 #' @rdname header_summary
 #' @export
 `header_summary.server` = function(value, ...) { #nolint
@@ -247,7 +246,6 @@ header_summary.scheme = function(value, ...) { #nolint
     status = "WARN"
     message = "Does not redirect to an HTTPS site"
   }
-
   dplyr::tibble(security_header = security_header,
                 status = status,
                 message = message,
