@@ -1,3 +1,6 @@
+# serverHeaders 0.0.4 _2023-05-18_
+- fix: x-xss-protection should be disabled (https://github.com/OWASP/CheatSheetSeries/issues/376)
+
 # serverHeaders 0.0.3 _2023-05-10_
 - feat: Return all status codes - not just the final code
 - tests: Add additional tests using different servers
