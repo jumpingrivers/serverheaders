@@ -1,7 +1,7 @@
 Type: Package
 Package: serverHeaders
 Title: Posit Connect Health Check
-Version: 0.0.2
+Version: 0.0.3
 Authors@R:
     person("Jumping", "Rivers", , "info@jumpingrivers.com", role = c("aut", "cre"))
 Description: Posit Connect Health Check. Deploys various content types to
@@ -12,6 +12,7 @@ Depends:
 Imports:
     cli,
     dplyr,
+    glue,
     httr,
     purrr,
     rlang,
