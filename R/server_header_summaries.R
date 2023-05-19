@@ -177,7 +177,7 @@ header_summary.scheme = function(value, ...) { #nolint
     message = "Acceptable setting found: x-xss-proection disabled"
   } else {
     status = "WARN"
-    message = "Recommendation: header should be set 0"
+    message = "Recommendation: header should be set to 0"
   }
   dplyr::tibble(security_header = security_header,
                 status = status,
