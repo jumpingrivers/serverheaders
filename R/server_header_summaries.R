@@ -174,7 +174,7 @@ header_summary.scheme = function(value, ...) { #nolint
   value = as.character(value)
   if (value == "0") {
     status = "OK"
-    message = "Acceptable setting found: x-xss-proection disabled"
+    message = "Acceptable setting found: x-xss-protection disabled"
   } else {
     status = "WARN"
     message = "Recommendation: header should be set to 0"
