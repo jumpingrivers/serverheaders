@@ -166,17 +166,18 @@ header_summary.scheme = function(value, ...) { #nolint
                 value = as.character(value))
 }
 
+# https://github.com/OWASP/CheatSheetSeries/issues/376
 #' @rdname header_summary
 #' @export
 `header_summary.x-xss-protection` = function(value, ...) { #nolint
   security_header = class(value)
   value = as.character(value)
-  if (value == "nosniff") {
+  if (value == "0") {
     status = "OK"
-    message = "Acceptable setting found"
+    message = "Acceptable setting found: x-xss-protection disabled"
   } else {
     status = "WARN"
-    message = "Required value ('nosniff') not present"
+    message = "Recommendation: header should be set to 0"
   }
   dplyr::tibble(security_header = security_header,
                 status = status,
