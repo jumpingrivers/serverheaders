@@ -1,9 +1,9 @@
 cli_message_output = function(all_headers, security_headers) {
   for (i in seq_len(nrow(all_headers))) {
     row = all_headers[i, ]
-    if (row$security_header %in% security_headers) {
+    if (row$header %in% security_headers) {
       col = get_status_col(row$status) #nolint
-      msg = "{col(row$security_header)}: {row$message}"
+      msg = "{col(row$header)}: {row$message}"
 
       if (row$status == "WARN") {
         msg = paste(msg, "({.href [Docs]({row$documentation})})")

@@ -1,11 +1,12 @@
 check_server_headers = function(server) {
   headers = get_response_headers(server)
   headers_summary = purrr::map2_df(headers, names(headers), header_summary)
-  security_headers = names(.documentation_links)
-  missing_headers = security_headers[!security_headers %in% headers_summary$security_header]
-  all_headers = dplyr::bind_rows(headers_summary, get_missing_headers(missing_headers)) |>
-    add_documentation_column()
-  cli_message_output(all_headers, security_headers)
+  missing_headers = .primary_headers[!.primary_headers %in% headers_summary$header]
+  all_headers = dplyr::bind_rows(headers_summary, get_missing_headers(missing_headers))
+  all_headers = add_documentation_column(all_headers)
+  all_headers = add_primary_column(all_headers)
+
+  cli_message_output(all_headers, .primary_headers)
   all_headers
 }
 
@@ -27,9 +28,9 @@ get_response_headers = function(server) {
   out
 }
 
-get_missing_headers = function(security_headers)  {
-  if (length(security_headers) == 0L) return(NULL)
-  dplyr::tibble(security_header = security_headers,
+get_missing_headers = function(headers)  {
+  if (length(headers) == 0L) return(NULL)
+  dplyr::tibble(header = headers,
                 status = "WARN",
                 message = "Header not set",
                 value = NA_character_)
