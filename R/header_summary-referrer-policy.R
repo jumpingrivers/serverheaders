@@ -1,7 +1,7 @@
 #' @rdname header_summary
 #' @export
 `header_summary.referrer-policy` = function(value, ...) { #nolint
-  security_header = class(value)
+  header = class(value)
   value = tolower(as.character(value))
 
   if (value %in% c("strict-origin", "strict-origin-when-cross-origin",
@@ -17,7 +17,7 @@
     status = "WARN"
     message = "No legitimate value present"
   }
-  dplyr::tibble(security_header = security_header,
+  dplyr::tibble(header = header,
                 status = status,
                 message = message,
                 value = value)

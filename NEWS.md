@@ -1,3 +1,8 @@
+# serverHeaders 0.1.0 _2023-05-23_
+- refactor: Use `header` instead of `security_header` for column name
+- feat: Match `https://securityheaders.com/` for highlighting headers
+- fix: Add message for successful STS header
+
 # serverHeaders 0.0.4 _2023-05-18_
 - fix: x-xss-protection should be disabled (https://github.com/OWASP/CheatSheetSeries/issues/376)
 
