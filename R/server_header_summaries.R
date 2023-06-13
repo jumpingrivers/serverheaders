@@ -262,13 +262,13 @@ header_summary.scheme = function(value, ...) { #nolint
     status = "OK"
     message = "Subresource Integrity is not needed since site contains no script tags"
   } else {
-    integrity = purrr::map(value, "integrity") |>
+    integrity = purrr::map(value, "integrity") %>%
       purrr::list_c()
 
     crossorigin = purrr::map(value, function(x) {
       crossorigin_attr = x["crossorigin"]
       !is.na(crossorigin_attr) && crossorigin_attr == "anonymous"
-    }) |>
+    }) %>%
       purrr::list_c()
 
     if (all(crossorigin) && all(!is.null(integrity))) {

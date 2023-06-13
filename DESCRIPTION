@@ -1,14 +1,13 @@
 Type: Package
 Package: serverHeaders
-Title: Posit Connect Health Check
-Version: 0.1.0
+Title: Server Header Summary
+Version: 0.1.1
 Authors@R:
     person("Jumping", "Rivers", , "info@jumpingrivers.com", role = c("aut", "cre"))
-Description: Posit Connect Health Check. Deploys various content types to
-    assess whether Connect is functioning correctly.
+Description: Checks and summarises a server headers for a given URL.
 License: file LICENSE
 Depends: 
-    R (>= 4.1.0)
+    R
 Imports:
     cli,
     dplyr,

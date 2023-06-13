@@ -53,8 +53,8 @@ is_redirected = function(res) {
 # Retrieves HTML attributes of any script tags to check
 # subresource integrity
 get_js_resources = function(res) {
-  res |>
-    httr::content() |>
-    rvest::html_elements("script") |>
+  res %>%
+    httr::content() %>%
+    rvest::html_elements("script") %>%
     rvest::html_attrs()
 }
