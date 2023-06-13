@@ -1,3 +1,6 @@
+# serverHeaders 0.1.1 _2023-06-13_
+- feat: Use %>% instead of |> to avoid R 4.1 dep
+
 # serverHeaders 0.1.0 _2023-05-23_
 - refactor: Use `header` instead of `security_header` for column name
 - feat: Match `https://securityheaders.com/` for highlighting headers
