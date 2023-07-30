@@ -15,7 +15,7 @@ get_response_headers = function(server) {
   out = c(
     httr::headers(res),
     list(scheme = httr::parse_url(res$url)[["scheme"]],
-         redirection = is_redirected(res),
+         redirection = is_redirected(res), # nolint: indentation_linter
          `subresource-integrity` = get_js_resources(res),
          cookies = httr::cookies(res)$secure
     )

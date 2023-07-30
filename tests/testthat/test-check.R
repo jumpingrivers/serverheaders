@@ -8,4 +8,4 @@ test_that("Testing check", {
   expect_equal(x$status_codes, 200)
   expect_equal(ncol(x$headers), 6)
   expect_gt(nrow(x$headers), 18)
-  })
+})

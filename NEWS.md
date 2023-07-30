@@ -1,3 +1,7 @@
+# serverHeaders 0.1.2 _2023-07-30_
+- feat: Output of `check()` is now invisible
+- fix: Minor changes to message
+
 # serverHeaders 0.1.1 _2023-06-13_
 - feat: Use %>% instead of |> to avoid R 4.1 dep
 

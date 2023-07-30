@@ -42,7 +42,7 @@ header_summary.scheme = function(value, ...) { #nolint
 `header_summary.report-to` = function(value, ...) { #nolint
   dplyr::tibble(header = class(value),
                 status = "OK",
-                message = "NOTE: Policy present but not parsed",
+                message = "Policy present but not parsed",
                 value = as.character(value))
 }
 
@@ -51,7 +51,7 @@ header_summary.scheme = function(value, ...) { #nolint
 `header_summary.nel` = function(value, ...) { #nolint
   dplyr::tibble(header = class(value),
                 status = "OK",
-                message = "NOTE: Policy present but not parsed",
+                message = "Policy present but not parsed",
                 value = as.character(value))
 }
 
@@ -60,7 +60,7 @@ header_summary.scheme = function(value, ...) { #nolint
 `header_summary.content-security-policy-report-only` = function(value, ...) { #nolint
   dplyr::tibble(header = class(value),
                 status = "OK",
-                message = "NOTE: Policy present but not parsed",
+                message = "Policy present but not parsed",
                 value = as.character(value))
 }
 
@@ -69,7 +69,7 @@ header_summary.scheme = function(value, ...) { #nolint
 `header_summary.content-security-policy` = function(value, ...) { #nolint
   dplyr::tibble(header = class(value),
                 status = "OK",
-                message = "NOTE: Policy present but not parsed",
+                message = "Policy present but not parsed",
                 value = as.character(value))
 }
 
