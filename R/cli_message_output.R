@@ -6,7 +6,7 @@ cli_message_output = function(all_headers, security_headers) {
       msg = "{col(row$header)}: {row$message}"
 
       if (row$status == "WARN") {
-        msg = paste(msg, "({.href [Docs]({row$documentation})})")
+        msg = paste(msg, "({.href [docs]({row$documentation})})")
         cli::cli_alert_danger(msg)
       } else {
         cli::cli_alert_success(msg)

@@ -1,3 +1,7 @@
+# serverHeaders 0.1.3 _2023-08-06_
+- feat: Detect missing `charset` in `content-type`
+- doc: Update README to install from r-universe
+
 # serverHeaders 0.1.2 _2023-07-30_
 - feat: Output of `check()` is now invisible
 - fix: Minor changes to message

@@ -12,8 +12,9 @@ check_server_headers = function(server) {
 
 get_response_headers = function(server) {
   res = httr::GET(server)
+  headers = httr::headers(res)
   out = c(
-    httr::headers(res),
+    headers,
     list(scheme = httr::parse_url(res$url)[["scheme"]],
          redirection = is_redirected(res), # nolint: indentation_linter
          `subresource-integrity` = get_js_resources(res),
@@ -53,8 +54,9 @@ is_redirected = function(res) {
 # Retrieves HTML attributes of any script tags to check
 # subresource integrity
 get_js_resources = function(res) {
-  res %>%
-    httr::content() %>%
+  # Avoid encoding message. Handled above
+  content = suppressMessages(httr::content(res))
+  content %>%
     rvest::html_elements("script") %>%
     rvest::html_attrs()
 }

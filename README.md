@@ -4,7 +4,7 @@ A simple interface to retrieve and examine HTTP headers from a website.
 The package is installed in the usual way
 
 ```
-remotes::install_github("jumpingrivers/serverheaders")
+install.packages('serverHeaders', repos = c('https://jumpingrivers.r-universe.dev', 'https://cloud.r-project.org'))
 ```
 
 The main function is `check()`

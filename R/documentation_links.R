@@ -1,5 +1,6 @@
 # nolint start: line_length_linter
-.primary_headers = c("content-security-policy",
+.primary_headers = c("content-type",
+                     "content-security-policy",
                      "permissions-policy",
                      "referrer-policy",
                      "strict-transport-security",
@@ -8,6 +9,7 @@
 
 .documentation_links = c(
   "access-control-allow-origin" = "https://infosec.mozilla.org/guidelines/web_security#cross-origin-resource-sharing",
+  "content-type" = "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type",
   "content-security-policy" = "https://infosec.mozilla.org/guidelines/web_security#content-security-policy",
   "cookies" = "https://infosec.mozilla.org/guidelines/web_security#cookies",
   "permissions-policy" = "https://scotthelme.co.uk/goodbye-feature-policy-and-hello-permissions-policy/",
