@@ -6,6 +6,7 @@
 \alias{header_summary}
 \alias{header_summary.default}
 \alias{header_summary.scheme}
+\alias{header_summary.content-type}
 \alias{header_summary.report-to}
 \alias{header_summary.nel}
 \alias{header_summary.content-security-policy-report-only}
@@ -31,6 +32,8 @@ header_summary(value, ...)
 \method{header_summary}{default}(value, ...)
 
 \method{header_summary}{scheme}(value, ...)
+
+\method{header_summary}{`content-type`}(value, ...)
 
 \method{header_summary}{`report-to`}(value, ...)
 

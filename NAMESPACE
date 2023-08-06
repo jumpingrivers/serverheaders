@@ -3,6 +3,7 @@
 S3method(header_summary,"access-control-allow-origin")
 S3method(header_summary,"content-security-policy")
 S3method(header_summary,"content-security-policy-report-only")
+S3method(header_summary,"content-type")
 S3method(header_summary,"permissions-policy")
 S3method(header_summary,"referrer-policy")
 S3method(header_summary,"report-to")

@@ -39,6 +39,24 @@ header_summary.scheme = function(value, ...) { #nolint
 
 #' @rdname header_summary
 #' @export
+`header_summary.content-type` = function(value, ...) { #nolint
+  header = class(value)
+  value = as.character(value)
+  if (stringr::str_detect(value, "charset")) {
+    status = "OK"
+    message = "charset set"
+  } else {
+    status = "WARN"
+    message = "No charset found in the content type"
+  }
+  dplyr::tibble(header = header,
+                status = status,
+                message = message,
+                value = value)
+}
+
+#' @rdname header_summary
+#' @export
 `header_summary.report-to` = function(value, ...) { #nolint
   dplyr::tibble(header = class(value),
                 status = "OK",
