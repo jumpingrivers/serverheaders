@@ -1,3 +1,7 @@
+# serverHeaders 0.1.4 _2023-09-29_
+- feat: Explicit check for ssl redirection
+- feat: Better cli output for STS
+
 # serverHeaders 0.1.3 _2023-08-06_
 - feat: Detect missing `charset` in `content-type`
 - doc: Update README to install from r-universe
