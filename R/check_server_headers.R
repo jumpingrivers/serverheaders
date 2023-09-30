@@ -3,9 +3,10 @@ check_server_headers = function(server) {
   headers_summary = purrr::map2_df(headers, names(headers), header_summary)
   missing_headers = .primary_headers[!.primary_headers %in% headers_summary$header]
   all_headers = dplyr::bind_rows(headers_summary, get_missing_headers(missing_headers))
+
   all_headers = add_documentation_column(all_headers)
   all_headers = add_primary_column(all_headers)
-
+  all_headers = dplyr::bind_rows(all_headers, check_ssl_functionality(server))
   cli_message_output(all_headers, .primary_headers)
   all_headers
 }
