@@ -1,3 +1,6 @@
+# serverHeaders 0.1.5 _2023-09-30_
+- feat: Make ssl checks a primary check with docs
+
 # serverHeaders 0.1.4 _2023-09-29_
 - feat: Explicit check for ssl redirection
 - feat: Better cli output for STS
