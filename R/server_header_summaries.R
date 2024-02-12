@@ -308,6 +308,7 @@ header_summary.scheme = function(value, ...) { #nolint
 ##############################
 # Depreciated headers
 ##############################
+#' @export
 `header_summary.public-key-pins` = function(value, ...) { #nolint
   dplyr::tibble(header = class(value),
                 status = "WARN",
@@ -315,6 +316,7 @@ header_summary.scheme = function(value, ...) { #nolint
                 value = as.character(value))
 }
 
+#' @export
 `header_summary.expect-ct` = function(value, ...) { #nolint
   dplyr::tibble(header = class(value),
                 status = "WARN",
