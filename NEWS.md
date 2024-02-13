@@ -1,3 +1,6 @@
+# serverHeaders 0.1.6 _2024-02-12_
+- fix: Handle non-ssl servers
+
 # serverHeaders 0.1.5 _2023-09-30_
 - feat: Make ssl checks a primary check with docs
 
