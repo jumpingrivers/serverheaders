@@ -1,3 +1,6 @@
+# serverHeaders 0.1.7 _2024-04-04_
+- fix: Failed SSL redirects
+
 # serverHeaders 0.1.6 _2024-02-12_
 - fix: Handle non-ssl servers
 
