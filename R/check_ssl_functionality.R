@@ -8,10 +8,16 @@ check_ssl_functionality = function(server) {
 
 check_ssl_redirect = function(clean_server) {
   server = paste0("http://", clean_server)
-  res = httr::HEAD(server)
-  status_codes = get_status_codes(res)
-  status_code_msg = glue::glue(paste(status_codes, collapse = " {cli::symbol$arrow_right} "))
-  if (any(stringr::str_starts(status_codes, "2")) && length(status_codes) > 1) {
+  res = try(httr::HEAD(server), silent = TRUE)
+  if (!("try-error" %in% class(res))) {
+    status_codes = get_status_codes(res)
+    status_code_msg = glue::glue(paste(status_codes, collapse = " {cli::symbol$arrow_right} "))
+  } else {
+    status_codes = NA
+    status_code_msg = "Connection failed"
+  }
+
+  if (length(status_codes) > 1 && any(stringr::str_starts(status_codes, "2"))) {
     status = "OK"
     message = "SSL redirection successful"
     cli::cli_alert_success("{cli::col_green({message})}: http -> https")
