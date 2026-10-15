@@ -110,12 +110,12 @@ header_summary.scheme = function(value, ...) { #nolint
   if (!is.na(max_age)) {
     max_age_days = max_age / 60 / 60 / 24
     # 1 year
-    if (max_age >= 365) {
+    if (max_age_days >= 365) {
       status = "OK"
       message = paste("max_age =", max_age_days, "days and is greater than 1 year")
     } else {
       status = "WARN"
-      message = paste("max_age =", max_age, "days but suggested value is 1 year")
+      message = paste("max_age =", max_age_days, "days but suggested value is 1 year")
     }
   } else {
     status = "WARN"
