@@ -9,7 +9,7 @@ check_ssl_functionality = function(server) {
 check_ssl_redirect = function(clean_server) {
   server = paste0("http://", clean_server)
   res = try(httr::HEAD(server), silent = TRUE)
-  if (!("try-error" %in% class(res))) {
+  if (!is_ssl_error(res)) {
     status_codes = get_status_codes(res)
     status_code_msg = glue::glue(paste(status_codes, collapse = " {cli::symbol$arrow_right} "))
   } else {
@@ -35,7 +35,7 @@ check_ssl_redirect = function(clean_server) {
   )
 }
 
-is_ssl_error = function(res) "try-error" %in% class(res)
+is_ssl_error = function(res) inherits(res, "try-error")
 get_ssl_error = function(res) {
   rtn = list()
   rtn$status_codes = NA_integer_
