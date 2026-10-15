@@ -75,6 +75,7 @@ header_summary.scheme = function(value, ...) {
 
 #' @rdname header_summary
 #' @export
+# nolint next: object_length_linter. Name must match the header for S3 dispatch
 `header_summary.content-security-policy-report-only` = function(value, ...) {
   dplyr::tibble(
     header = class(value),
@@ -204,6 +205,7 @@ header_summary.scheme = function(value, ...) {
 
 #' @rdname header_summary
 #' @export
+# nolint next: object_length_linter. Name must match the header for S3 dispatch
 `header_summary.x-permitted-cross-domain-policies` = function(value, ...) {
   header = class(value)
   value = as.character(value)
@@ -272,13 +274,13 @@ header_summary.scheme = function(value, ...) {
     status = "OK"
     message = "Subresource Integrity is not needed since site contains no script tags"
   } else {
-    integrity = purrr::map(value, "integrity") %>%
+    integrity = purrr::map(value, "integrity") |>
       purrr::list_c()
 
     crossorigin = purrr::map(value, function(x) {
       crossorigin_attr = x["crossorigin"]
       !is.na(crossorigin_attr) && crossorigin_attr == "anonymous"
-    }) %>%
+    }) |>
       purrr::list_c()
 
     if (all(crossorigin) && all(!is.null(integrity))) {

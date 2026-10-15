@@ -53,7 +53,7 @@ get_ssl_route = function(res) {
   rtn$status_code_msg = glue::glue(paste(
     rtn$status_codes,
     collapse = " {cli::symbol$arrow_right} "
-  )) #nolint
+  ))
   if (any(stringr::str_starts(rtn$status_codes, "2"))) {
     rtn$status = "OK"
     rtn$message = "SSL available"

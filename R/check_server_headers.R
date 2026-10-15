@@ -18,7 +18,7 @@ get_response_headers = function(server) {
     headers,
     list(
       scheme = httr::parse_url(res$url)[["scheme"]],
-      redirection = is_redirected(res), # nolint: indentation_linter
+      redirection = is_redirected(res),
       `subresource-integrity` = get_js_resources(res),
       cookies = httr::cookies(res)$secure
     )
@@ -49,16 +49,14 @@ get_missing_headers = function(headers) {
 
 get_status_codes = function(res) {
   all_headers = res$all_headers
-  status_codes = purrr::map_dbl(all_headers, "status")
-  return(status_codes)
+  purrr::map_dbl(all_headers, "status")
 }
 
 # Does the website redirection implemented i.e. HTTP -> HTTPS?
 is_redirected = function(res) {
   status_codes = get_status_codes(res)
   http_versions = purrr::map_chr(res$all_headers, "version")
-  redirection = any(grepl("^3", status_codes)) || any(http_versions == "HTTP/2")
-  return(redirection)
+  any(grepl("^3", status_codes)) || any(http_versions == "HTTP/2")
 }
 
 # Retrieves HTML attributes of any script tags to check
@@ -70,7 +68,7 @@ get_js_resources = function(res) {
   }
   # Avoid encoding message. Handled above
   content = suppressMessages(httr::content(res))
-  content %>%
-    rvest::html_elements("script") %>%
+  content |>
+    rvest::html_elements("script") |>
     rvest::html_attrs()
 }
