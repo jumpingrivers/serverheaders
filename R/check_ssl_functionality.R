@@ -35,30 +35,30 @@ check_ssl_redirect = function(clean_server) {
   )
 }
 
-is_ssl_expired = function(res) "try-error" %in% class(res)
-get_ssl_expired = function(res) {
+is_ssl_error = function(res) "try-error" %in% class(res)
+get_ssl_error = function(res) {
   rtn = list()
   rtn$status_codes = NA_integer_
   rtn$status = "WARN"
   rtn$message = "SSL incorrect"
-
-  status_code_msg = "SSL certificate problem: certificate has expired" #nolint
-  cli::cli_alert_danger("{cli::col_red({rtn$message})}: {status_code_msg}")
+  # e.g. expired or missing certificate, or host not found
+  rtn$status_code_msg = conditionMessage(attr(res, "condition"))
+  cli::cli_alert_danger("{cli::col_red({rtn$message})}: {rtn$status_code_msg}")
   rtn
 }
 
 get_ssl_route = function(res) {
   rtn = list()
   rtn$status_codes = get_status_codes(res)
-  status_code_msg = glue::glue(paste(rtn$status_codes, collapse = " {cli::symbol$arrow_right} ")) #nolint
+  rtn$status_code_msg = glue::glue(paste(rtn$status_codes, collapse = " {cli::symbol$arrow_right} ")) #nolint
   if (any(stringr::str_starts(rtn$status_codes, "2"))) {
     rtn$status = "OK"
     rtn$message = "SSL available"
-    cli::cli_alert_success("{cli::col_green({rtn$message})}: {status_code_msg}")
+    cli::cli_alert_success("{cli::col_green({rtn$message})}: {rtn$status_code_msg}")
   } else {
     rtn$status = "WARN"
     rtn$message = "SSL incorrect"
-    cli::cli_alert_danger("{cli::col_red({rtn$message})}: {status_code_msg}")
+    cli::cli_alert_danger("{cli::col_red({rtn$message})}: {rtn$status_code_msg}")
   }
   rtn
 }
@@ -66,9 +66,8 @@ get_ssl_route = function(res) {
 check_ssl = function(clean_server) {
   server = paste0("https://", clean_server)
   res = try(httr::HEAD(server), silent = TRUE)
-  # Usually no cert at all
-  if (is_ssl_expired(res)) {
-    rtn = get_ssl_expired(res)
+  if (is_ssl_error(res)) {
+    rtn = get_ssl_error(res)
   } else {
     rtn = get_ssl_route(res)
   }
