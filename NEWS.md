@@ -1,3 +1,9 @@
+# serverHeaders 0.1.8
+
+## Bug fixes and minor improvements
+
+* HSTS `max-age` is now compared in days, so values under a year get a WARN.
+
 # serverHeaders 0.1.7 _2024-04-04_
 - fix: Failed SSL redirects
 
