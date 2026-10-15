@@ -1,11 +1,19 @@
 #' @rdname header_summary
 #' @export
-`header_summary.referrer-policy` = function(value, ...) { #nolint
+`header_summary.referrer-policy` = function(value, ...) {
   header = class(value)
   value = tolower(as.character(value))
 
-  if (value %in% c("strict-origin", "strict-origin-when-cross-origin",
-                   "no-referrer-when-downgrade", "no-referrer", "same-origin")) {
+  if (
+    value %in%
+      c(
+        "strict-origin",
+        "strict-origin-when-cross-origin",
+        "no-referrer-when-downgrade",
+        "no-referrer",
+        "same-origin"
+      )
+  ) {
     status = "OK"
     message = "Acceptable setting found"
     # Empty string OK, but then relies on meta tags
@@ -17,8 +25,5 @@
     status = "WARN"
     message = "No legitimate value present"
   }
-  dplyr::tibble(header = header,
-                status = status,
-                message = message,
-                value = value)
+  dplyr::tibble(header = header, status = status, message = message, value = value)
 }

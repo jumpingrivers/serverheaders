@@ -11,7 +11,6 @@ cli_message_output = function(all_headers, security_headers) {
       } else {
         cli::cli_alert_success(msg)
       }
-
     }
   }
   return(invisible(NULL))

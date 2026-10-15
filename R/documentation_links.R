@@ -1,11 +1,13 @@
 # nolint start: line_length_linter
-.primary_headers = c("content-type",
-                     "content-security-policy",
-                     "permissions-policy",
-                     "referrer-policy",
-                     "strict-transport-security",
-                     "x-content-type-options",
-                     "x-frame-options")
+.primary_headers = c(
+  "content-type",
+  "content-security-policy",
+  "permissions-policy",
+  "referrer-policy",
+  "strict-transport-security",
+  "x-content-type-options",
+  "x-frame-options"
+)
 
 .documentation_links = c(
   "access-control-allow-origin" = "https://infosec.mozilla.org/guidelines/web_security#cross-origin-resource-sharing",
