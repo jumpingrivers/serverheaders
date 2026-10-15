@@ -1,3 +1,9 @@
+# serverHeaders 0.1.9
+
+## Bug fixes and minor improvements
+
+* The SSL check reports the real connection error, not always "certificate has expired", and the `ssl` row keeps its value.
+
 # serverHeaders 0.1.8
 
 ## Bug fixes and minor improvements
