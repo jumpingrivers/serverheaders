@@ -1,3 +1,9 @@
+# serverHeaders 0.1.13
+
+## Bug fixes and minor improvements
+
+* The package is now MIT licensed.
+
 # serverHeaders 0.1.12
 
 ## Bug fixes and minor improvements
