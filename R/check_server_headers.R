@@ -59,7 +59,7 @@ is_redirected = function(res) {
   any(grepl("^3", status_codes)) || any(http_versions == "HTTP/2")
 }
 
-# Retrieves HTML attributes of any script tags to check
+# Retrieves HTML attributes of cross-origin script tags to check
 # subresource integrity
 get_js_resources = function(res) {
   # JSON, images etc have no script tags to parse
@@ -68,7 +68,35 @@ get_js_resources = function(res) {
   }
   # Avoid encoding message. Handled above
   content = suppressMessages(httr::content(res))
-  content |>
+  scripts = content |>
     rvest::html_elements("script") |>
     rvest::html_attrs()
+  get_cross_origin_scripts(scripts, res$url)
+}
+
+# Inline and same-origin scripts can't be swapped by a third party,
+# so only cross-origin scripts need subresource integrity
+get_cross_origin_scripts = function(scripts, page_url) {
+  page_origin = get_origin(page_url)
+  is_cross_origin = vapply(
+    scripts,
+    function(attrs) {
+      src = attrs["src"]
+      if (is.na(src) || !nzchar(src)) {
+        return(FALSE)
+      }
+      get_origin(xml2::url_absolute(src, page_url)) != page_origin
+    },
+    logical(1)
+  )
+  scripts[is_cross_origin]
+}
+
+get_origin = function(url) {
+  parts = httr::parse_url(url)
+  port = parts$port
+  if (is.null(port)) {
+    port = unname(c(http = "80", https = "443")[parts$scheme])
+  }
+  paste0(parts$scheme, "://", tolower(parts$hostname), ":", port)
 }

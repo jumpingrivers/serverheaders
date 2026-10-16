@@ -270,25 +270,33 @@ header_summary.scheme = function(value, ...) {
 `header_summary.subresource-integrity` = function(value, ...) {
   header = class(value)
 
+  # value holds the attributes of each cross-origin script
   if (length(value) == 0) {
     status = "OK"
-    message = "Subresource Integrity is not needed since site contains no script tags"
+    message = "Subresource Integrity is not needed since the page loads no cross-origin scripts"
   } else {
-    integrity = purrr::map(value, "integrity") |>
-      purrr::list_c()
+    # crossorigin = "" means anonymous, so any value will do
+    is_protected = vapply(
+      value,
+      function(attrs) {
+        integrity = attrs["integrity"]
+        !is.na(integrity) && nzchar(integrity) && !is.na(attrs["crossorigin"])
+      },
+      logical(1)
+    )
 
-    crossorigin = purrr::map(value, function(x) {
-      crossorigin_attr = x["crossorigin"]
-      !is.na(crossorigin_attr) && crossorigin_attr == "anonymous"
-    }) |>
-      purrr::list_c()
-
-    if (all(crossorigin) && all(!is.null(integrity))) {
+    if (all(is_protected)) {
       status = "OK"
       message = "Subresource Integrity is implemented"
     } else {
       status = "WARN"
-      message = "Subresource Integrity not implemented"
+      message = paste(
+        "Subresource Integrity missing on",
+        sum(!is_protected),
+        "of",
+        length(is_protected),
+        "cross-origin scripts"
+      )
     }
   }
 

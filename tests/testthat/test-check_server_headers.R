@@ -30,7 +30,29 @@ test_that("Script tags are only looked for in HTML", {
 
   html = fake_response(
     "text/html; charset=utf-8",
-    '<html><head><script src="a.js"></script></head></html>'
+    '<html><head><script src="https://cdn.example.net/a.js"></script></head></html>'
   )
-  expect_equal(get_js_resources(html)[[1]][["src"]], "a.js")
+  expect_equal(get_js_resources(html)[[1]][["src"]], "https://cdn.example.net/a.js")
+})
+
+test_that("Only cross-origin scripts need subresource integrity", {
+  scripts = list(
+    character(0),
+    c(type = "application/ld+json"),
+    c(src = "/js/local.js"),
+    c(src = "https://WWW.example.com:443/js/same.js"),
+    c(src = "//cdn.example.net/lib.js", integrity = "sha384-x", crossorigin = ""),
+    c(src = "https://example.com/apex.js"),
+    c(src = "http://www.example.com/insecure.js")
+  )
+  cross = get_cross_origin_scripts(scripts, "https://www.example.com/page")
+  expect_equal(
+    vapply(cross, \(x) x[["src"]], character(1)),
+    c(
+      "//cdn.example.net/lib.js",
+      "https://example.com/apex.js",
+      "http://www.example.com/insecure.js"
+    )
+  )
+  expect_equal(get_cross_origin_scripts(list(), "https://www.example.com"), list())
 })

@@ -97,17 +97,25 @@ test_that("Redirection is reported", {
   expect_equal(summarise_header(FALSE, "redirection")$status, "WARN")
 })
 
-test_that("Subresource Integrity is checked on script tags", {
+test_that("Every cross-origin script needs integrity and crossorigin", {
   sri = function(value) summarise_header(value, "subresource-integrity")
-  expect_equal(sri(list())$status, "OK")
+  expect_match(sri(list())$message, "no cross-origin scripts")
 
   hashed = c(
     src = "https://cdn.example.com/a.js",
     integrity = "sha384-x",
     crossorigin = "anonymous"
   )
-  expect_equal(sri(list(hashed))$status, "OK")
+  empty_crossorigin = c(
+    src = "https://cdn.example.com/b.js",
+    integrity = "sha384-y",
+    crossorigin = ""
+  )
+  expect_equal(sri(list(hashed, empty_crossorigin))$status, "OK")
 
-  no_crossorigin = c(src = "https://cdn.example.com/b.js", integrity = "sha384-y")
-  expect_equal(sri(list(hashed, no_crossorigin))$status, "WARN")
+  no_integrity = c(src = "https://cdn.example.com/c.js", crossorigin = "anonymous")
+  no_crossorigin = c(src = "https://cdn.example.com/d.js", integrity = "sha384-z")
+  out = sri(list(hashed, no_integrity, no_crossorigin))
+  expect_equal(out$status, "WARN")
+  expect_equal(out$message, "Subresource Integrity missing on 2 of 3 cross-origin scripts")
 })
