@@ -12,9 +12,12 @@ test_that("SSL errors report the real error and keep the value", {
 })
 
 test_that("Sites without an SSL certificate get a WARN", {
-  skip_if_offline()
-  # neverssl.com never serves https
-  ssl = suppressMessages(check_ssl("neverssl.com"))
+  # What curl reports for a site that doesn't serve https
+  local_mocked_bindings(
+    HEAD = function(...) stop("SSL connect error"),
+    .package = "httr"
+  )
+  ssl = suppressMessages(check_ssl("no-https.example.com"))
   expect_equal(ssl$status, "WARN")
   expect_equal(ssl$message, "SSL incorrect")
   expect_false(is.na(ssl$value))
