@@ -1,9 +1,15 @@
 test_that("Is redirected works", {
-  res = httr::GET("neverssl.com")
-  expect_false(is_redirected(res))
-  res = httr::GET("google.com")
-  expect_true(is_redirected(res))
-  expect_true(is.data.frame(check("http://httpforever.com/")$headers))
+  response = function(status, version = "HTTP/1.1") {
+    list(all_headers = purrr::map2(status, version, \(s, v) list(status = s, version = v)))
+  }
+  expect_false(is_redirected(response(200)))
+  expect_true(is_redirected(response(c(301, 200))))
+  expect_true(is_redirected(response(200, "HTTP/2")))
+})
+
+test_that("check() copes with a site that has no https", {
+  skip_if_offline()
+  expect_true(is.data.frame(suppressMessages(check("http://httpforever.com/"))$headers))
 })
 
 fake_response = function(type, body) {
