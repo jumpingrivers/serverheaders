@@ -1,3 +1,9 @@
+# serverHeaders 0.1.12
+
+## Bug fixes and minor improvements
+
+* New test: a site without HTTPS gets a WARN from the SSL check.
+
 # serverHeaders 0.1.11
 
 ## Bug fixes and minor improvements
