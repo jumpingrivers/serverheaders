@@ -1,3 +1,10 @@
+# serverHeaders 0.1.18
+
+## Bug fixes and minor improvements
+
+* `ssl-redirection` now passes only when the http request ends on an https page with a 2xx status. Before, any redirect chain containing a 2xx passed.
+* The `redirection` row and `header_summary.redirection()` are gone. They treated any 3xx or HTTP/2 response as an HTTPS redirect, and duplicated `ssl-redirection`.
+
 # serverHeaders 0.1.17
 
 ## Bug fixes and minor improvements
