@@ -3,3 +3,4 @@
 ^\.lintr$
 ^air\.toml$
 ^LICENSE\.md$
+^\.github$
