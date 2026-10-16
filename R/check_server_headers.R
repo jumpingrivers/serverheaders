@@ -55,6 +55,8 @@ is_redirected = function(res) {
 # Retrieves HTML attributes of any script tags to check
 # subresource integrity
 get_js_resources = function(res) {
+  # JSON, images etc have no script tags to parse
+  if (!httr::http_type(res) %in% c("text/html", "application/xhtml+xml")) return(list())
   # Avoid encoding message. Handled above
   content = suppressMessages(httr::content(res))
   content %>%

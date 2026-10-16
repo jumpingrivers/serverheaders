@@ -1,3 +1,9 @@
+# serverHeaders 0.1.10
+
+## Bug fixes and minor improvements
+
+* `check()` no longer errors on non-HTML responses such as JSON.
+
 # serverHeaders 0.1.9
 
 ## Bug fixes and minor improvements
