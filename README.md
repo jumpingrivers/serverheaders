@@ -14,7 +14,7 @@ library("serverHeaders")
 x = check("google.com")
 ```
 
-The output from `check()` is contains the status code `x$status_code` and a data frame
+The output from `check()` contains the status codes `x$status_codes` and a data frame
 of headers `x$headers`. The data frame provides information about each header.
 
 Note: An unknown header is expected.
@@ -33,15 +33,18 @@ For example, running
 check("jumpingrivers.com")
 # ── Checking Server ──
 # 
-# ✔ Status code: 200
-# ✖ content-security-policy: Header not set (Docs)
-# ✖ permissions-policy: Header not set (Docs)
+# ✔ Status code: 301 → 301 → 200
+# ✔ SSL available: 301 → 200
+# ✔ SSL redirection successful: http -> https
+# ✔ content-security-policy: Policy present but not parsed
+# ✔ content-type: charset set
+# ✔ permissions-policy: Value present but not verified
 # ✔ referrer-policy: Acceptable setting found
-# ✔ strict-transport-security: max_age present and greater than 1 year
+# ✔ strict-transport-security: max_age = 365 days and is greater than 1 year
 # ✔ x-content-type-options: Acceptable setting found
 # ✔ x-frame-options: Acceptable setting found
 ```
-highlights we still need to set our content security policy and our permissions policy.
+shows every flagged header passing. A header that fails is marked ✖, with a link to its documentation.
 
 ## Status Codes
 
@@ -60,7 +63,7 @@ check("jumpingrivers.com")$status_codes
 Where `301` indicates a redirect and `200` the final successful response.
 
 Note: when we omit the transport protocol (the http part), the default is `http`, i.e.
-[jumpingrivers.com](https://www.jumprivers.com) is the same as [http://jumpingrivers.com](https://www.jumprivers.com).
+`jumpingrivers.com` is the same as `http://jumpingrivers.com`.
 
 ---
 

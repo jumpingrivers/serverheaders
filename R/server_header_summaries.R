@@ -296,7 +296,7 @@ header_summary.scheme = function(value, ...) {
 }
 
 ##############################
-# Depreciated headers
+# Deprecated headers
 ##############################
 #' @export
 `header_summary.public-key-pins` = function(value, ...) {
