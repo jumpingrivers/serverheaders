@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="600" viewBox="0 0 520 600">
+  <defs><clipPath id="c"><polygon points="260,16 505.7,158 505.7,442 260,584 14.3,442 14.3,158"/></clipPath></defs>
+  <polygon points="260,0 519.6,150 519.6,450 260,600 0.4,450 0.4,150" fill="#EA687E"/>
+  <polygon points="260,16 505.7,158 505.7,442 260,584 14.3,442 14.3,158" fill="#0C293D"/>
+  <g clip-path="url(#c)">
+    <!-- Address bar -->
+    <rect x="62" y="150" width="396" height="70" rx="35" fill="#F4F1F8"/>
+    <g transform="translate(96,163)" fill="#3FB37F">
+      <path d="M8 20 V13 a12 12 0 0 1 24 0 V20" fill="none" stroke="#3FB37F" stroke-width="6"/>
+      <rect x="0" y="19" width="40" height="27" rx="5"/>
+    </g>
+    <text x="152" y="198" font-family="Fira Code" font-size="34" font-weight="500" fill="#0C293D">https://</text>
+    <!-- Header lines -->
+    <g font-family="Fira Code" font-size="22" fill="#CCBFE0">
+      <rect x="92" y="252" width="260" height="14" rx="7" fill="#CCBFE0" opacity="0.85"/>
+      <rect x="92" y="290" width="215" height="14" rx="7" fill="#CCBFE0" opacity="0.85"/>
+      <rect x="92" y="328" width="285" height="14" rx="7" fill="#CCBFE0" opacity="0.85"/>
+    </g>
+    <g fill="none" stroke="#3FB37F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M392 259 l8 8 l16 -18"/>
+      <path d="M392 297 l8 8 l16 -18"/>
+      <path d="M392 335 l8 8 l16 -18"/>
+    </g>
+    <text x="260" y="448" text-anchor="middle" font-family="Lato" font-weight="900" font-size="58" fill="#FFFFFF">serverHeaders</text>
+  </g>
+</svg>
