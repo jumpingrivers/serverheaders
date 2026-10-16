@@ -1,7 +1,7 @@
 Type: Package
 Package: serverHeaders
 Title: Server Header Summary
-Version: 0.1.16
+Version: 0.1.17
 Authors@R:
     person("Jumping", "Rivers", , "info@jumpingrivers.com", role = c("aut", "cre"))
 Description: Checks and summarises the server headers for a given URL.

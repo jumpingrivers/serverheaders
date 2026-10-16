@@ -1,3 +1,9 @@
+# serverHeaders 0.1.17
+
+## Bug fixes and minor improvements
+
+* The Subresource Integrity check now ignores inline and same-origin scripts, and needs `integrity` and `crossorigin` on every cross-origin script. One hashed script no longer passes the whole page.
+
 # serverHeaders 0.1.16
 
 ## Bug fixes and minor improvements
