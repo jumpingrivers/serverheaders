@@ -10,3 +10,13 @@ test_that("SSL errors report the real error and keep the value", {
   expect_false(is.na(ssl$value))
   expect_no_match(ssl$value, "expired")
 })
+
+test_that("Sites without an SSL certificate get a WARN", {
+  skip_if_offline()
+  # neverssl.com never serves https
+  ssl = suppressMessages(check_ssl("neverssl.com"))
+  expect_equal(ssl$status, "WARN")
+  expect_equal(ssl$message, "SSL incorrect")
+  expect_false(is.na(ssl$value))
+  expect_no_match(ssl$value, "expired")
+})
