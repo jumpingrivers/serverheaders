@@ -1,5 +1,5 @@
 check_ssl_functionality = function(server) {
-  clean_server = stringr::str_remove(server, "http(s?)://")
+  clean_server = stringr::str_remove(server, stringr::regex("^https?://", ignore_case = TRUE))
   dplyr::bind_rows(
     check_ssl(clean_server),
     check_ssl_redirect(clean_server)

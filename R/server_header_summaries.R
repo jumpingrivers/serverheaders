@@ -155,7 +155,7 @@ header_summary.scheme = function(value, ...) {
 `header_summary.x-content-type-options` = function(value, ...) {
   header = class(value)
   value = as.character(value)
-  if (value == "nosniff") {
+  if (tolower(trimws(value)) == "nosniff") {
     status = "OK"
     message = "Acceptable setting found"
   } else {
@@ -193,7 +193,7 @@ header_summary.scheme = function(value, ...) {
 `header_summary.x-xss-protection` = function(value, ...) {
   header = class(value)
   value = as.character(value)
-  if (value == "0" || value == "1; mode=block") {
+  if (gsub(" ", "", tolower(value), fixed = TRUE) %in% c("0", "1;mode=block")) {
     status = "OK"
     message = paste("Acceptable setting found: x-xss-protection:", value)
   } else {
