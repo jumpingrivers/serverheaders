@@ -1,3 +1,10 @@
+# serverHeaders 0.1.15
+
+## Bug fixes and minor improvements
+
+* README: correct `x$status_codes`, the links and the example output.
+* DESCRIPTION: fix the Description sentence and drop `LazyData`, as the package has no data.
+
 # serverHeaders 0.1.14
 
 ## Bug fixes and minor improvements
