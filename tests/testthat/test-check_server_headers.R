@@ -1,12 +1,3 @@
-test_that("Is redirected works", {
-  response = function(status, version = "HTTP/1.1") {
-    list(all_headers = purrr::map2(status, version, \(s, v) list(status = s, version = v)))
-  }
-  expect_false(is_redirected(response(200)))
-  expect_true(is_redirected(response(c(301, 200))))
-  expect_true(is_redirected(response(200, "HTTP/2")))
-})
-
 test_that("check() copes with a site that has no https", {
   skip_if_offline()
   skip_on_ci()

@@ -36,3 +36,19 @@ test_that("Only a leading scheme is stripped, in any case", {
     "example.com/?next=https://other.com"
   )
 })
+
+test_that("An http request must end on a working https page", {
+  response = function(url, status) {
+    list(url = url, all_headers = lapply(status, \(s) list(status = s)))
+  }
+  expect_true(is_https_redirect(response("https://example.com/", c(301, 200))))
+  expect_true(is_https_redirect(response("HTTPS://example.com/", c(301, 301, 204))))
+  # Redirects to another http page
+  expect_false(is_https_redirect(response("http://www.example.com/", c(301, 200))))
+  # No redirect at all
+  expect_false(is_https_redirect(response("http://example.com/", 200)))
+  # Ends on an error page
+  expect_false(is_https_redirect(response("https://example.com/", c(301, 404))))
+  # Connection failed
+  expect_false(is_https_redirect(try(stop("Timeout"), silent = TRUE)))
+})
