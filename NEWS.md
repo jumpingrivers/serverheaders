@@ -1,3 +1,9 @@
+# serverHeaders 0.1.19
+
+## New features
+
+* Hex sticker logo, shown in the README. The source is `man/figures/logo.svg`.
+
 # serverHeaders 0.1.18
 
 ## Bug fixes and minor improvements
