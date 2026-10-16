@@ -18,7 +18,6 @@ get_response_headers = function(server) {
     headers,
     list(
       scheme = httr::parse_url(res$url)[["scheme"]],
-      redirection = is_redirected(res),
       `subresource-integrity` = get_js_resources(res),
       cookies = httr::cookies(res)$secure
     )
@@ -52,12 +51,6 @@ get_status_codes = function(res) {
   purrr::map_dbl(all_headers, "status")
 }
 
-# Does the website redirection implemented i.e. HTTP -> HTTPS?
-is_redirected = function(res) {
-  status_codes = get_status_codes(res)
-  http_versions = purrr::map_chr(res$all_headers, "version")
-  any(grepl("^3", status_codes)) || any(http_versions == "HTTP/2")
-}
 
 # Retrieves HTML attributes of cross-origin script tags to check
 # subresource integrity

@@ -13,11 +13,10 @@ check_ssl_redirect = function(clean_server) {
     status_codes = get_status_codes(res)
     status_code_msg = glue::glue(paste(status_codes, collapse = " {cli::symbol$arrow_right} "))
   } else {
-    status_codes = NA
     status_code_msg = "Connection failed"
   }
 
-  if (length(status_codes) > 1 && any(stringr::str_starts(status_codes, "2"))) {
+  if (is_https_redirect(res)) {
     status = "OK"
     message = "SSL redirection successful"
     cli::cli_alert_success("{cli::col_green({message})}: http -> https")
@@ -32,7 +31,19 @@ check_ssl_redirect = function(clean_server) {
     message = message,
     value = status_code_msg,
     primary_header = TRUE,
+    documentation = .documentation_links[["ssl-redirection"]]
   )
+}
+
+# An http request should end on an https page that loads (2xx)
+is_https_redirect = function(res) {
+  if (is_ssl_error(res)) {
+    return(FALSE)
+  }
+  status_codes = get_status_codes(res)
+  final_status = status_codes[length(status_codes)]
+  final_scheme = tolower(httr::parse_url(res$url)$scheme)
+  identical(final_scheme, "https") && isTRUE(final_status >= 200 && final_status < 300)
 }
 
 is_ssl_error = function(res) inherits(res, "try-error")

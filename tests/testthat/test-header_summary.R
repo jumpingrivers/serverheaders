@@ -92,11 +92,6 @@ test_that("Cookies must all use the Secure flag", {
   expect_equal(summarise_header(c(TRUE, FALSE), "cookies")$status, "WARN")
 })
 
-test_that("Redirection is reported", {
-  expect_equal(summarise_header(TRUE, "redirection")$status, "OK")
-  expect_equal(summarise_header(FALSE, "redirection")$status, "WARN")
-})
-
 test_that("Every cross-origin script needs integrity and crossorigin", {
   sri = function(value) summarise_header(value, "subresource-integrity")
   expect_match(sri(list())$message, "no cross-origin scripts")

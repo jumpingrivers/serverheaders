@@ -15,7 +15,7 @@
   "content-security-policy" = "https://infosec.mozilla.org/guidelines/web_security#content-security-policy",
   "cookies" = "https://infosec.mozilla.org/guidelines/web_security#cookies",
   "permissions-policy" = "https://scotthelme.co.uk/goodbye-feature-policy-and-hello-permissions-policy/",
-  "redirection" = "https://infosec.mozilla.org/guidelines/web_security#http-redirections",
+  "ssl-redirection" = "https://infosec.mozilla.org/guidelines/web_security#http-redirections",
   "referrer-policy" = "https://infosec.mozilla.org/guidelines/web_security#referrer-policy",
   "strict-transport-security" = "https://infosec.mozilla.org/guidelines/web_security#http-strict-transport-security",
   "subresource-integrity" = "https://infosec.mozilla.org/guidelines/web_security#subresource-integrity",

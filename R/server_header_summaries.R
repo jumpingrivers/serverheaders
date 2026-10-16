@@ -252,21 +252,6 @@ header_summary.scheme = function(value, ...) {
 
 #' @rdname header_summary
 #' @export
-`header_summary.redirection` = function(value, ...) {
-  header = class(value)
-  value = as.logical(value)
-  if (value) {
-    status = "OK"
-    message = "Redirects to HTTPS"
-  } else {
-    status = "WARN"
-    message = "Does not redirect to an HTTPS site"
-  }
-  dplyr::tibble(header = header, status = status, message = message, value = NA_character_)
-}
-
-#' @rdname header_summary
-#' @export
 `header_summary.subresource-integrity` = function(value, ...) {
   header = class(value)
 
