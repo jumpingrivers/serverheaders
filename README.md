@@ -1,4 +1,4 @@
-# Server Headers
+# Server Headers <img src="man/figures/logo.png" align="right" height="138" alt="" />
 
 A simple interface to retrieve and examine HTTP headers from a website.
 The package is installed in the usual way
