@@ -7,7 +7,6 @@ check = function(server) {
 
   status_codes = check_status_code(server)
   headers = check_server_headers(server)
-  rtn = list(status_codes = status_codes,
-             headers = headers)
+  rtn = list(status_codes = status_codes, headers = headers)
   invisible(rtn)
 }

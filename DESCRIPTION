@@ -1,11 +1,13 @@
 Type: Package
 Package: serverHeaders
 Title: Server Header Summary
-Version: 0.1.10
+Version: 0.1.11
 Authors@R:
     person("Jumping", "Rivers", , "info@jumpingrivers.com", role = c("aut", "cre"))
 Description: Checks and summarises a server headers for a given URL.
 License: file LICENSE
+Depends:
+    R (>= 4.1.0)
 Imports:
     cli,
     dplyr,
@@ -21,4 +23,4 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+Config/roxygen2/version: 8.0.0

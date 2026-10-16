@@ -10,18 +10,20 @@ header_summary = function(value, ...) UseMethod("header_summary")
 
 #' @rdname header_summary
 #' @export
-header_summary.default = function(value, ...) { #nolint
+header_summary.default = function(value, ...) {
   header = class(value)
   value = as.character(value)
-  dplyr::tibble(header = header,
-                status = "UNKNOWN",
-                message = "Heading not considered",
-                value = value)
+  dplyr::tibble(
+    header = header,
+    status = "UNKNOWN",
+    message = "Heading not considered",
+    value = value
+  )
 }
 
 #' @rdname header_summary
 #' @export
-header_summary.scheme = function(value, ...) { #nolint
+header_summary.scheme = function(value, ...) {
   header = class(value)
   value = as.character(value)
   if (value == "https") {
@@ -31,15 +33,12 @@ header_summary.scheme = function(value, ...) { #nolint
     status = "WARN"
     message = "Should be https"
   }
-  dplyr::tibble(header = header,
-                status = status,
-                message = message,
-                value = value)
+  dplyr::tibble(header = header, status = status, message = message, value = value)
 }
 
 #' @rdname header_summary
 #' @export
-`header_summary.content-type` = function(value, ...) { #nolint
+`header_summary.content-type` = function(value, ...) {
   header = class(value)
   value = as.character(value)
   if (stringr::str_detect(value, "charset")) {
@@ -49,60 +48,68 @@ header_summary.scheme = function(value, ...) { #nolint
     status = "WARN"
     message = "No charset found in the content type"
   }
-  dplyr::tibble(header = header,
-                status = status,
-                message = message,
-                value = value)
+  dplyr::tibble(header = header, status = status, message = message, value = value)
 }
 
 #' @rdname header_summary
 #' @export
-`header_summary.report-to` = function(value, ...) { #nolint
-  dplyr::tibble(header = class(value),
-                status = "OK",
-                message = "Policy present but not parsed",
-                value = as.character(value))
+`header_summary.report-to` = function(value, ...) {
+  dplyr::tibble(
+    header = class(value),
+    status = "OK",
+    message = "Policy present but not parsed",
+    value = as.character(value)
+  )
 }
 
 #' @rdname header_summary
 #' @export
-`header_summary.nel` = function(value, ...) { #nolint
-  dplyr::tibble(header = class(value),
-                status = "OK",
-                message = "Policy present but not parsed",
-                value = as.character(value))
+`header_summary.nel` = function(value, ...) {
+  dplyr::tibble(
+    header = class(value),
+    status = "OK",
+    message = "Policy present but not parsed",
+    value = as.character(value)
+  )
 }
 
 #' @rdname header_summary
 #' @export
-`header_summary.content-security-policy-report-only` = function(value, ...) { #nolint
-  dplyr::tibble(header = class(value),
-                status = "OK",
-                message = "Policy present but not parsed",
-                value = as.character(value))
+# nolint next: object_length_linter. Name must match the header for S3 dispatch
+`header_summary.content-security-policy-report-only` = function(value, ...) {
+  dplyr::tibble(
+    header = class(value),
+    status = "OK",
+    message = "Policy present but not parsed",
+    value = as.character(value)
+  )
 }
 
 #' @rdname header_summary
 #' @export
-`header_summary.content-security-policy` = function(value, ...) { #nolint
-  dplyr::tibble(header = class(value),
-                status = "OK",
-                message = "Policy present but not parsed",
-                value = as.character(value))
+`header_summary.content-security-policy` = function(value, ...) {
+  dplyr::tibble(
+    header = class(value),
+    status = "OK",
+    message = "Policy present but not parsed",
+    value = as.character(value)
+  )
 }
 
 #' @rdname header_summary
 #' @export
-`header_summary.access-control-allow-origin` = function(value, ...) { #nolint
-  dplyr::tibble(header = class(value),
-                status = "NOTE",
-                message = "Access-Control-Allow-Origin present",
-                value = as.character(value))
+`header_summary.access-control-allow-origin` = function(value, ...) {
+  dplyr::tibble(
+    header = class(value),
+    status = "NOTE",
+    message = "Access-Control-Allow-Origin present",
+    value = as.character(value)
+  )
 }
 
 #' @rdname header_summary
 #' @export
-`header_summary.strict-transport-security` = function(value, ...) { #nolint
+`header_summary.strict-transport-security` = function(value, ...) {
   header = class(value)
   value = as.character(value)
   max_age = stringr::str_match(value, "max-age=([0-9]+)")[1, 2]
@@ -122,15 +129,12 @@ header_summary.scheme = function(value, ...) { #nolint
     message = "Minimum required value ('max-age') not present"
   }
 
-  dplyr::tibble(header = header,
-                status = status,
-                message = message,
-                value = value)
+  dplyr::tibble(header = header, status = status, message = message, value = value)
 }
 
 #' @rdname header_summary
 #' @export
-`header_summary.x-frame-options` = function(value, ...) { #nolint
+`header_summary.x-frame-options` = function(value, ...) {
   header = class(value)
   value = as.character(value)
   if (tolower(value) %in% c("deny", "sameorigin")) {
@@ -143,15 +147,12 @@ header_summary.scheme = function(value, ...) { #nolint
     status = "WARN"
     message = "Values 'deny' or 'sameorigin' not found"
   }
-  dplyr::tibble(header = header,
-                status = status,
-                message = message,
-                value = value)
+  dplyr::tibble(header = header, status = status, message = message, value = value)
 }
 
 #' @rdname header_summary
 #' @export
-`header_summary.x-content-type-options` = function(value, ...) { #nolint
+`header_summary.x-content-type-options` = function(value, ...) {
   header = class(value)
   value = as.character(value)
   if (value == "nosniff") {
@@ -161,34 +162,35 @@ header_summary.scheme = function(value, ...) { #nolint
     status = "WARN"
     message = "Required value ('nosniff') not present"
   }
-  dplyr::tibble(header = header,
-                status = status,
-                message = message,
-                value = value)
+  dplyr::tibble(header = header, status = status, message = message, value = value)
 }
 
 #' @rdname header_summary
 #' @export
-`header_summary.permissions-policy` = function(value, ...) { #nolint
-  dplyr::tibble(header = class(value),
-                status = "OK",
-                message = "Value present but not verified",
-                value = as.character(value))
+`header_summary.permissions-policy` = function(value, ...) {
+  dplyr::tibble(
+    header = class(value),
+    status = "OK",
+    message = "Value present but not verified",
+    value = as.character(value)
+  )
 }
 
 #' @rdname header_summary
 #' @export
-`header_summary.server` = function(value, ...) { #nolint
-  dplyr::tibble(header = class(value),
-                status = "NOTE",
-                message = paste("Server header found:", as.character(value)),
-                value = as.character(value))
+`header_summary.server` = function(value, ...) {
+  dplyr::tibble(
+    header = class(value),
+    status = "NOTE",
+    message = paste("Server header found:", as.character(value)),
+    value = as.character(value)
+  )
 }
 
 # https://github.com/OWASP/CheatSheetSeries/issues/376
 #' @rdname header_summary
 #' @export
-`header_summary.x-xss-protection` = function(value, ...) { #nolint
+`header_summary.x-xss-protection` = function(value, ...) {
   header = class(value)
   value = as.character(value)
   if (value == "0" || value == "1; mode=block") {
@@ -198,15 +200,13 @@ header_summary.scheme = function(value, ...) { #nolint
     status = "WARN"
     message = "Recommendation: header should be set to 0"
   }
-  dplyr::tibble(header = header,
-                status = status,
-                message = message,
-                value = value)
+  dplyr::tibble(header = header, status = status, message = message, value = value)
 }
 
 #' @rdname header_summary
 #' @export
-`header_summary.x-permitted-cross-domain-policies` = function(value, ...) { #nolint
+# nolint next: object_length_linter. Name must match the header for S3 dispatch
+`header_summary.x-permitted-cross-domain-policies` = function(value, ...) {
   header = class(value)
   value = as.character(value)
   if (tolower(value) %in% c("none", "master-only", "by-content-type", "by-ftp-filename", "all")) {
@@ -216,24 +216,23 @@ header_summary.scheme = function(value, ...) { #nolint
     status = "WARN"
     message = "No legitimate value present"
   }
-  dplyr::tibble(header = header,
-                status = status,
-                message = message,
-                value = value)
+  dplyr::tibble(header = header, status = status, message = message, value = value)
 }
 
 #' @rdname header_summary
 #' @export
-`header_summary.x-powered-by` = function(value, ...) { #nolint
-  dplyr::tibble(header = class(value),
-                status = "WARN",
-                message = "X-Powered-By header present",
-                value = as.character(value))
+`header_summary.x-powered-by` = function(value, ...) {
+  dplyr::tibble(
+    header = class(value),
+    status = "WARN",
+    message = "X-Powered-By header present",
+    value = as.character(value)
+  )
 }
 
 #' @rdname header_summary
 #' @export
-`header_summary.cookies` = function(value, ...) { #nolint
+`header_summary.cookies` = function(value, ...) {
   header = class(value)
   value = as.logical(value)
 
@@ -248,15 +247,12 @@ header_summary.scheme = function(value, ...) { #nolint
     message = "Cookies set without using the Secure flag"
   }
 
-  dplyr::tibble(header = header,
-                status = status,
-                message = message,
-                value = NA_character_)
+  dplyr::tibble(header = header, status = status, message = message, value = NA_character_)
 }
 
 #' @rdname header_summary
 #' @export
-`header_summary.redirection` = function(value, ...) { #nolint
+`header_summary.redirection` = function(value, ...) {
   header = class(value)
   value = as.logical(value)
   if (value) {
@@ -266,28 +262,25 @@ header_summary.scheme = function(value, ...) { #nolint
     status = "WARN"
     message = "Does not redirect to an HTTPS site"
   }
-  dplyr::tibble(header = header,
-                status = status,
-                message = message,
-                value = NA_character_)
+  dplyr::tibble(header = header, status = status, message = message, value = NA_character_)
 }
 
 #' @rdname header_summary
 #' @export
-`header_summary.subresource-integrity` = function(value, ...) { #nolint
+`header_summary.subresource-integrity` = function(value, ...) {
   header = class(value)
 
   if (length(value) == 0) {
     status = "OK"
     message = "Subresource Integrity is not needed since site contains no script tags"
   } else {
-    integrity = purrr::map(value, "integrity") %>%
+    integrity = purrr::map(value, "integrity") |>
       purrr::list_c()
 
     crossorigin = purrr::map(value, function(x) {
       crossorigin_attr = x["crossorigin"]
       !is.na(crossorigin_attr) && crossorigin_attr == "anonymous"
-    }) %>%
+    }) |>
       purrr::list_c()
 
     if (all(crossorigin) && all(!is.null(integrity))) {
@@ -299,27 +292,28 @@ header_summary.scheme = function(value, ...) { #nolint
     }
   }
 
-  dplyr::tibble(header = header,
-                status = status,
-                message = message,
-                value = NA_character_)
+  dplyr::tibble(header = header, status = status, message = message, value = NA_character_)
 }
 
 ##############################
 # Depreciated headers
 ##############################
 #' @export
-`header_summary.public-key-pins` = function(value, ...) { #nolint
-  dplyr::tibble(header = class(value),
-                status = "WARN",
-                message = "This header is deprecated",
-                value = as.character(value))
+`header_summary.public-key-pins` = function(value, ...) {
+  dplyr::tibble(
+    header = class(value),
+    status = "WARN",
+    message = "This header is deprecated",
+    value = as.character(value)
+  )
 }
 
 #' @export
-`header_summary.expect-ct` = function(value, ...) { #nolint
-  dplyr::tibble(header = class(value),
-                status = "WARN",
-                message = "This header is deprecated",
-                value = as.character(value))
+`header_summary.expect-ct` = function(value, ...) {
+  dplyr::tibble(
+    header = class(value),
+    status = "WARN",
+    message = "This header is deprecated",
+    value = as.character(value)
+  )
 }

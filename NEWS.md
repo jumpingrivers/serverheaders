@@ -1,3 +1,10 @@
+# serverHeaders 0.1.11
+
+## Bug fixes and minor improvements
+
+* Now requires R >= 4.1.0, for the native pipe.
+* Code is formatted with air (`air.toml`) and passes lintr.
+
 # serverHeaders 0.1.10
 
 ## Bug fixes and minor improvements

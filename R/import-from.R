@@ -1,5 +1,2 @@
-#' @importFrom rlang .data .env
-NULL
-
-#' @importFrom dplyr %>%
+#' @importFrom rlang .data
 NULL
