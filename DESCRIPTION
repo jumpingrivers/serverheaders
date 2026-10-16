@@ -5,7 +5,7 @@ Version: 0.1.12
 Authors@R:
     person("Jumping", "Rivers", , "info@jumpingrivers.com", role = c("aut", "cre"))
 Description: Checks and summarises a server headers for a given URL.
-License: file LICENSE
+License: MIT + file LICENSE
 Depends:
     R (>= 4.1.0)
 Imports:
