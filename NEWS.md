@@ -1,3 +1,11 @@
+# serverHeaders 0.1.14
+
+## Bug fixes and minor improvements
+
+* `referrer-policy` lists such as `no-referrer, strict-origin-when-cross-origin` are judged on the last recognised value.
+* `x-content-type-options` and `x-xss-protection` are compared case-insensitively.
+* Only a leading `http://` or `https://` is stripped from the server, in any case.
+
 # serverHeaders 0.1.13
 
 ## Bug fixes and minor improvements
