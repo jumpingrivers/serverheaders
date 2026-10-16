@@ -2,7 +2,7 @@
 
 ## Bug fixes and minor improvements
 
-* Every `header_summary()` method now has offline tests, and live tests skip when offline.
+* Every `header_summary()` method now has offline tests, and live tests skip when offline or on CI.
 * R CMD check runs on GitHub Actions for pushes to main and pull requests.
 
 # serverHeaders 0.1.15

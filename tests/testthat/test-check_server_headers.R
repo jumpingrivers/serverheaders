@@ -9,6 +9,7 @@ test_that("Is redirected works", {
 
 test_that("check() copes with a site that has no https", {
   skip_if_offline()
+  skip_on_ci()
   expect_true(is.data.frame(suppressMessages(check("http://httpforever.com/"))$headers))
 })
 
