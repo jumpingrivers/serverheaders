@@ -1,6 +1,7 @@
-test_that("Test Status codes", {
-  status_codes = check_status_code("jumpingrivers.com")
-  expect_true(any(grepl(200, status_codes)))
-  status_codes = check_status_code("jumpingrivers.com/bad-page")
-  expect_true(any(grepl(404, status_codes)))
+test_that("Status codes follow each redirect", {
+  skip_if_offline()
+  status_codes = suppressMessages(check_status_code("jumpingrivers.com"))
+  expect_equal(status_codes[length(status_codes)], 200)
+  status_codes = suppressMessages(check_status_code("jumpingrivers.com/bad-page"))
+  expect_equal(status_codes[length(status_codes)], 404)
 })
